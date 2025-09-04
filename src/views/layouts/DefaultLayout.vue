@@ -22,9 +22,13 @@
     </header>
 
     <main class="flex-1 p-6 bg-[var(--color-cream)]">
-      <slot :selectedPhase="selectedPhase"></slot>
+      <slot :selectedPhase="selectedPhase">
+        <ExampleTask/>
+      </slot>
     </main>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import ExampleTask from '../components/cards/ExampleTask.vue'
+</script>
