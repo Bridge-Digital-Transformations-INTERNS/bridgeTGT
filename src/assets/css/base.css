@@ -1,0 +1,14 @@
+:root {
+  --color-lime: #e3ea4e;
+  --color-palm: #349083;
+  --color-yellow: #fdeb96;
+  --color-blue: #a8bfd3;
+  --color-cream: #fff4de;
+  --color-cacao: #352623;
+
+  /* Example usage for status system */
+  --color-pending: var(--color-cream);
+  --color-progress: var(--color-blue);
+  --color-completed: var(--color-palm);
+  --color-validated: var(--color-cacao);
+}

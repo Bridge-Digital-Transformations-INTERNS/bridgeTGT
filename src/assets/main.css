@@ -1,0 +1,18 @@
+@import "tailwindcss";
+@layer base {
+  :root {
+    /* Fonts */
+    --font-albert: "Albert Sans", sans-serif;
+    --font-fkmono: "FK Grotesk Mono", monospace;
+    --font-serif36: "Source Serif 36", serif;
+    --font-serif48i: "Source Serif 48 Italic", serif;
+
+     /* Theme Colors */
+    --color-lime: #e3ea4e;
+    --color-palm: #349083;
+    --color-sticky: #fdeb96;
+    --color-powder: #a8bfd3;
+    --color-cream: #fff4de;
+    --color-cacao: #352623;
+  }
+}

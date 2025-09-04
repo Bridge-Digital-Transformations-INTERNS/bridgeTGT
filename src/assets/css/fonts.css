@@ -1,0 +1,27 @@
+@font-face {
+  font-family: "Albert Sans";
+  src: url("../fonts/AlbertSans-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "FK Grotesk Mono";
+  src: url("../fonts/FKGroteskSemiMonoTrial-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Source Serif 36";
+  src: url("../fonts/SourceSerif4_36pt-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Source Serif 48 Italic";
+  src: url("../fonts/SourceSerif4_48pt-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
