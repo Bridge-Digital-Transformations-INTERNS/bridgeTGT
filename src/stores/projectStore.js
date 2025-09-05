@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
-import { WEIGHTS } from "../utils/weights";
 
 //Example Data para saimong mama
 export const useProjectStore = defineStore("project", () => {
@@ -50,12 +49,12 @@ export const useProjectStore = defineStore("project", () => {
   ]);
 
   const selectedProjectId = ref(1);
-  const selectedPhase = ref("Overall");
 
   const selectedProject = computed(() =>
     projects.value.find((p) => p.id === selectedProjectId.value),
   );
 
+  // Project CRUD operations
   function addProject(name) {
     projects.value.push({ id: Date.now(), name, tasks: [] });
   }
@@ -68,6 +67,7 @@ export const useProjectStore = defineStore("project", () => {
     if (!projects.value.length) selectedProjectId.value = null;
   }
 
+  // Task operations (delegated from TaskStore)
   function addTask(projectId, task) {
     const p = projects.value.find((x) => x.id === projectId);
     if (p) p.tasks.push({ ...task, id: Date.now() });
@@ -80,76 +80,27 @@ export const useProjectStore = defineStore("project", () => {
     if (t) Object.assign(t, patch);
   }
 
-  const filteredTasks = computed(() => {
-    const p = selectedProject.value;
-    if (!p) return [];
-    if (selectedPhase.value === "Overall") return p.tasks;
-    return p.tasks.filter((t) => t.phase === selectedPhase.value);
-  });
-
-  const counts = computed(() => {
-    const p = selectedProject.value;
-    if (!p)
-      return {
-        totalTasks: 0,
-        light: 0,
-        medium: 0,
-        heavy: 0,
-        completed: 0,
-        inprogress: 0,
-        pending: 0,
-      };
-    const res = {
-      totalTasks: 0,
-      light: 0,
-      medium: 0,
-      heavy: 0,
-      completed: 0,
-      inprogress: 0,
-      pending: 0,
-    };
-    p.tasks.forEach((t) => {
-      res.totalTasks += 1;
-      if (t.weight === "light") res.light += 1;
-      if (t.weight === "medium") res.medium += 1;
-      if (t.weight === "heavy") res.heavy += 1;
-      if (t.status === "completed") res.completed += 1;
-      if (t.status === "inprogress") res.inprogress += 1;
-      if (t.status === "pending") res.pending += 1;
-    });
-    return res;
-  });
-
-  const points = computed(() => {
-    const p = selectedProject.value;
-    if (!p) return { completed: 0, total: 0 };
-    let completed = 0;
-    let total = 0;
-    p.tasks.forEach((t) => {
-      const w = WEIGHTS[t.weight] || 1;
-      total += w;
-      if (t.status === "completed") completed += w;
-    });
-    return { completed, total };
-  });
-
-  const percent = computed(() => {
-    const { completed, total } = points.value;
-    return total === 0 ? 0 : (completed / total) * 100;
-  });
+  function deleteTask(projectId, taskId) {
+    const p = projects.value.find((x) => x.id === projectId);
+    if (!p) return;
+    const idx = p.tasks.findIndex((x) => x.id === taskId);
+    if (idx >= 0) p.tasks.splice(idx, 1);
+  }
 
   return {
+    // State
     projects,
     selectedProjectId,
-    selectedPhase,
+    
+    // Computed
     selectedProject,
+    
+    // Actions
     addProject,
     deleteProject,
     addTask,
     updateTask,
-    filteredTasks,
-    counts,
-    points,
-    percent,
+    deleteTask,
   };
 });
+
