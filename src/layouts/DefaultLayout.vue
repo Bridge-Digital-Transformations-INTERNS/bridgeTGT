@@ -16,7 +16,10 @@
     </main>
 
     <!-- Project Modals -->
-    <AddProjectModal v-if="showProjectModal" @close="showProjectModal = false" />
+    <AddProjectModal
+      v-if="showProjectModal"
+      @close="showProjectModal = false"
+    />
     <EditProjectModal
       v-if="showEditProjectModal"
       :projectId="selectedProjectId"
@@ -31,32 +34,32 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useProjectStore } from '@/stores/useProjectStore'
+import { ref } from "vue";
+import { useProjectStore } from "@/stores/projectStore";
 
-import HeaderBar from '@/components/HeaderBar.vue'
-import AddProjectModal from '@/components/AddProjectModal.vue'
-import EditProjectModal from '@/components/EditProjectModal.vue'
-import AddTaskModal from '@/components/AddTaskModal.vue'
+import HeaderBar from "@/components/HeaderBar.vue";
+import AddProjectModal from "@/components/AddProjectModal.vue";
+import EditProjectModal from "@/components/EditProjectModal.vue";
+import AddTaskModal from "@/components/AddTaskModal.vue";
 
-const projectStore = useProjectStore()
+const projectStore = useProjectStore();
 
 // State
-const selectedProjectId = ref(null)
-const showProjectModal = ref(false)
-const showTaskModal = ref(false)
-const showEditProjectModal = ref(false)
+const selectedProjectId = ref(null);
+const showProjectModal = ref(false);
+const showTaskModal = ref(false);
+const showEditProjectModal = ref(false);
 
-const projects = projectStore.projects
+const projects = projectStore.projects;
 
 // Handlers
 const editProject = () => {
-  showEditProjectModal.value = true
-}
+  showEditProjectModal.value = true;
+};
 const deleteProject = () => {
   if (selectedProjectId.value) {
-    projectStore.deleteProject(selectedProjectId.value)
-    selectedProjectId.value = null
+    projectStore.deleteProject(selectedProjectId.value);
+    selectedProjectId.value = null;
   }
-}
+};
 </script>

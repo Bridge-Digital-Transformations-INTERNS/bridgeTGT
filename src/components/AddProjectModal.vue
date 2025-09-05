@@ -10,19 +10,19 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useProjectStore } from '@/stores/useProjectStore'
+import { ref } from "vue";
+import { useProjectStore } from "@/stores/projectStore";
 
-const name = ref("")
-const store = useProjectStore()
+const name = ref("");
+const store = useProjectStore();
 
 const add = () => {
   if (name.value) {
-    store.addProject(name.value)
-    name.value = ""
-    emit('close')
+    store.addProject(name.value);
+    name.value = "";
+    emit("close");
   }
-}
+};
 
-const emit = defineEmits(["close"])
+const emit = defineEmits(["close"]);
 </script>

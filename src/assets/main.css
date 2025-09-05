@@ -1,4 +1,6 @@
-@import "tailwindcss";
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 @layer base {
   :root {
@@ -14,50 +16,20 @@
     --color-cream: #fff4de;
     --color-cacao: #352623;
   }
-}
-body {
-  font-family: var(--font-albert);
-  background: var(--color-cream);
-  margin: 0;
-}
-.header {
-  width: 100%;
-  background: #fff;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
-}
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 1rem;
-}
-.card {
-  background: #fff;
-  padding: 1rem;
-  border-radius: 8px;
-}
-.input {
-  padding: 0.5rem 2rem;
 
-  border: 1px solid #ddd;
-  border-radius: 6px;
+  html, body, #app {
+    height: 100%;
+    font-family: var(--font-albert);
+    background: linear-gradient(180deg, #f7f9fb 0%, #ffffff 100%);
+  }
+}
 
-}
-.btn {
-  padding: 0.4rem 1rem;
-  border-radius: 6px;
-  background: var(--color-palm);
-  font-family: var(--font-albert);
-  color: #fff;
-  border: none;
-  cursor: pointer;
-}
-.table {
-  width: 100%;
-  border-collapse: collapse;
-}
-.table th,
-.table td {
-  padding: 0.5rem;
-  border-bottom: 1px solid #eee;
-  text-align: left;
-}
+/* small utility for status colors used in components */
+.status-light { background-color: #fef3c7; }
+.status-medium { background-color: #fde68a; }
+.status-heavy { background-color: #fecaca; }
+
+/* Task status colors */
+.status-inprogress { background-color: #bfdbfe; }
+.status-finished-not-validated { background-color: #93c5fd; }
+.status-finished-validated { background-color: #7c3aed; color: white }

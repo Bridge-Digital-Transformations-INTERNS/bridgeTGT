@@ -25,12 +25,12 @@
 
 <script setup>
 import { ref, computed } from "vue";
-import { useProjectStore } from "@/stores/useProjectStore";
+import { useProjectStore } from "@/stores/projectStore";
 import { useTaskStore } from "@/stores/useTaskStore";
 
 import HeaderBar from "@/components/HeaderBar.vue";
-import PhaseOverview from "@/components/PhaseOverview.vue";
-import TaskTable from "@/components/TaskTable.vue";
+import PhaseOverview from "@/components/ProgressOverview.vue";
+import TaskTable from "@/components/TaskRow.vue";
 import AddProjectModal from "@/components/AddProjectModal.vue";
 import AddTaskModal from "@/components/AddTaskModal.vue";
 

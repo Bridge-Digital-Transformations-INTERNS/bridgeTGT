@@ -1,7 +1,16 @@
 <template>
-  <StatusBoard />
+  <div class="min-h-screen flex flex-col bg-[var(--color-cream)]" >
+    <HeaderBar />
+
+    <main class="p-6 max-w-6xl mx-auto w-full ">
+      <ProgressOverview />
+      <TasksTable />
+    </main>
+  </div>
 </template>
 
 <script setup>
-import StatusBoard from './views/StatusBoard.vue'
+import HeaderBar from './components/HeaderBar.vue'
+import ProgressOverview from './components/ProgressOverview.vue'
+import TasksTable from './components/TaskTable.vue'
 </script>

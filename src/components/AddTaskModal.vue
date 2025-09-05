@@ -22,24 +22,24 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import { useProjectStore } from '@/stores/useProjectStore'
-import { useTaskStore } from '@/stores/useTaskStore'
+import { ref, computed } from "vue";
+import { useProjectStore } from "@/stores/projectStore";
+import { useTaskStore } from "@/stores/useTaskStore";
 
-const props = defineProps({ projectId: String })
-const emit = defineEmits(["close"])
+const props = defineProps({ projectId: String });
+const emit = defineEmits(["close"]);
 
-const name = ref("")
-const phase = ref("")
-const category = ref("")
-const status = ref("Pending")
-const date = ref("")
-const assignee = ref("")
+const name = ref("");
+const phase = ref("");
+const category = ref("");
+const status = ref("Pending");
+const date = ref("");
+const assignee = ref("");
 
-const projectStore = useProjectStore()
-const taskStore = useTaskStore()
+const projectStore = useProjectStore();
+const taskStore = useTaskStore();
 
-const project = computed(() => projectStore.getProjectById(props.projectId))
+const project = computed(() => projectStore.getProjectById(props.projectId));
 
 const add = () => {
   if (props.projectId && name.value) {
@@ -49,9 +49,9 @@ const add = () => {
       category: category.value,
       status: status.value,
       date: date.value,
-      assignee: assignee.value
-    })
-    emit('close')
+      assignee: assignee.value,
+    });
+    emit("close");
   }
-}
+};
 </script>
