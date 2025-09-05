@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white p-6 rounded-2xl shadow">
+  <div class="bg-white p-6 rounded-2xl shadow ">
     <div class="flex items-start justify-between">
       <div>
         <h2 class="text-lg font-bold mb-1">

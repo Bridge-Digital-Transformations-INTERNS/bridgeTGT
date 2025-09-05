@@ -37,9 +37,13 @@
         <tr v-for="t in paged" :key="t.id" class="border-t">
           <td class="p-2">{{ t.title }}</td>
           <td class="p-2">{{ t.phase }}</td>
-          <td class="p-2 capitalize">{{ t.category }}</td>
+          <td class="p-2 capitalize">{{ t.weight }}</td>
           <td class="p-2">
-            <select v-model="t.status" @change="updateStatus(t)" class="p-1 border rounded">
+            <select
+              v-model="t.status"
+              @change="updateStatus(t)"
+              class="p-1 border rounded"
+            >
               <option value="pending">Pending</option>
               <option value="inprogress">In Progress</option>
               <option value="completed">Completed</option>
@@ -47,8 +51,18 @@
           </td>
           <td class="p-2">{{ t.assignee }}</td>
           <td class="p-2">
-            <button @click="openEdit(t)" class="px-2 py-1 bg-blue-100 text-xs rounded">Edit</button>
-            <button @click="askDelete(t)" class="px-2 py-1 bg-red-100 text-xs rounded text-red-600 ml-1">Delete</button>
+            <button
+              @click="openEdit(t)"
+              class="px-2 py-1 bg-blue-100 text-xs rounded"
+            >
+              Edit
+            </button>
+            <button
+              @click="askDelete(t)"
+              class="px-2 py-1 bg-red-100 text-xs rounded text-red-600 ml-1"
+            >
+              Delete
+            </button>
           </td>
         </tr>
       </transition-group>
@@ -90,9 +104,10 @@ const list = computed(() => store.filteredTasks);
 
 const filtered = computed(() => {
   return list.value.filter((t) => {
-    if (q.value && !t.title.toLowerCase().includes(q.value.toLowerCase())) return false;
+    if (q.value && !t.title.toLowerCase().includes(q.value.toLowerCase()))
+      return false;
     if (statusFilter.value && t.status !== statusFilter.value) return false;
-    if (categoryFilter.value && t.category !== categoryFilter.value) return false;
+    if (categoryFilter.value && t.weight !== categoryFilter.value) return false;
     return true;
   });
 });
@@ -107,7 +122,9 @@ function openEdit(task) {
   editing.value = task;
   showModal.value = true;
 }
-function close() { showModal.value = false }
+function close() {
+  showModal.value = false;
+}
 function save(data) {
   store.updateTask(store.selectedProjectId, editing.value.id, data);
   close();
@@ -140,10 +157,25 @@ function updateStatus(task) {
 </script>
 
 <style scoped>
-.list-enter-from { opacity: 0; transform: translateY(-6px) }
-.list-enter-to { opacity: 1; transform: translateY(0) }
-.list-enter-active { transition: all 0.18s ease }
-.list-leave-from { opacity: 1 }
-.list-leave-to { opacity: 0; transform: translateY(-6px) }
-.list-leave-active { transition: all 0.15s ease }
+.list-enter-from {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+.list-enter-to {
+  opacity: 1;
+  transform: translateY(0);
+}
+.list-enter-active {
+  transition: all 0.18s ease;
+}
+.list-leave-from {
+  opacity: 1;
+}
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+.list-leave-active {
+  transition: all 0.15s ease;
+}
 </style>

@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 import { WEIGHTS } from "../utils/weights";
 
+//Example Data para saimong mama
 export const useProjectStore = defineStore("project", () => {
   const projects = ref([
     {

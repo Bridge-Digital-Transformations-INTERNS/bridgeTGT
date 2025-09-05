@@ -1,5 +1,5 @@
 <template>
-  <header class="flex items-center justify-between p-4 bg-white shadow-md">
+  <header class="flex items-center justify-between p-4 bg-[var(--color-cream)] shadow-md">
     <div class="flex items-center gap-3">
       <img src="/src/bridge-logo.png" alt="BridgeTGT" class="h-12" />
     </div>

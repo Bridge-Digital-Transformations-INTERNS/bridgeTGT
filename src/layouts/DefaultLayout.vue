@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen flex flex-col">
+  <div class="min-h-screen flex flex-col bg-[var(--color-powder)]">
     <!-- Global Header -->
     <HeaderBar
       :projects="projects"
@@ -11,7 +11,7 @@
     />
 
     <!-- Page body -->
-    <main class="flex-1 p-6 bg-[var(--color-cream)]">
+    <main class="flex-1 p-6 ">
       <slot />
     </main>
 
