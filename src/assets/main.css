@@ -1,13 +1,12 @@
 @import "tailwindcss";
+
 @layer base {
   :root {
-    /* Fonts */
     --font-albert: "Albert Sans", sans-serif;
     --font-fkmono: "FK Grotesk Mono", monospace;
     --font-serif36: "Source Serif 36", serif;
     --font-serif48i: "Source Serif 48 Italic", serif;
 
-     /* Theme Colors */
     --color-lime: #e3ea4e;
     --color-palm: #349083;
     --color-sticky: #fdeb96;
@@ -15,4 +14,50 @@
     --color-cream: #fff4de;
     --color-cacao: #352623;
   }
+}
+body {
+  font-family: var(--font-albert);
+  background: var(--color-cream);
+  margin: 0;
+}
+.header {
+  width: 100%;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+.card {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+}
+.input {
+  padding: 0.5rem 2rem;
+
+  border: 1px solid #ddd;
+  border-radius: 6px;
+
+}
+.btn {
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  background: var(--color-palm);
+  font-family: var(--font-albert);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table th,
+.table td {
+  padding: 0.5rem;
+  border-bottom: 1px solid #eee;
+  text-align: left;
 }
