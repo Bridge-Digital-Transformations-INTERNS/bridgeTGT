@@ -15,8 +15,8 @@
 </template>
 
 <script setup>
-const props = defineProps({ task: Object })
 import { computed } from 'vue'
+const props = defineProps({ task: Object })
 
 const statusClass = computed(() => {
   if (props.task.status === 'inprogress') return 'status-inprogress'

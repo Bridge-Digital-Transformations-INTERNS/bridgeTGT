@@ -2,17 +2,11 @@
   <div class="mt-6 bg-white p-4 rounded-2xl shadow">
     <div class="flex gap-3 items-center mb-4">
       <input v-model="q" placeholder="Search tasks..." class="p-2 border rounded flex-1" />
-      <select v-model="categoryFilter" class="p-2 border rounded">
-        <option value="">All Categories</option>
-      </select>
       <select v-model="statusFilter" class="p-2 border rounded">
         <option value="">All Status</option>
         <option value="completed">Completed</option>
         <option value="inprogress">In Progress</option>
         <option value="pending">Pending</option>
-      </select>
-      <select v-model="roleFilter" class="p-2 border rounded">
-        <option value="">All Roles</option>
       </select>
     </div>
 
@@ -28,22 +22,23 @@
         </tr>
       </thead>
       <tbody>
-        <TaskRow v-for="t in paged" :key="t.id" :task="t" @edit="onEdit" @delete="onDelete" />
+        <TaskRow v-for="t in paged" :key="t.id" :task="t" @edit="openEdit(t)" @delete="onDelete" />
       </tbody>
     </table>
+
+    <TaskModal :open="showModal" :isEdit="true" :initial="editing" @close="close" @save="save" />
   </div>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue'
 import TaskRow from './TaskRow.vue'
+import TaskModal from './TaskModal.vue'
 import { useProjectStore } from '../stores/projectStore'
 
 const store = useProjectStore()
 const q = ref('')
-const categoryFilter = ref('')
 const statusFilter = ref('')
-const roleFilter = ref('')
 
 const list = computed(() => store.filteredTasks)
 
@@ -57,9 +52,22 @@ const filtered = computed(() => {
 
 const paged = computed(() => filtered.value)
 
-function onEdit(task) {
-  const status = prompt('Status (completed/inprogress/pending)', task.status)
-  if (status) store.updateTask(store.selectedProjectId, task.id, { status })
+// Modal state
+const showModal = ref(false)
+const editing = ref(null)
+
+function openEdit(task) {
+  editing.value = task
+  showModal.value = true
+}
+
+function close() {
+  showModal.value = false
+}
+
+function save(data) {
+  store.updateTask(store.selectedProjectId, editing.value.id, data)
+  close()
 }
 
 function onDelete(task) {

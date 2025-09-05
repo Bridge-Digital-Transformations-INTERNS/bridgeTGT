@@ -1,8 +1,8 @@
 <template>
-  <div class="min-h-screen flex flex-col bg-[var(--color-cream)]" >
+  <div class="min-h-screen flex flex-col">
     <HeaderBar />
 
-    <main class="p-6 max-w-6xl mx-auto w-full ">
+    <main class="p-6 max-w-6xl mx-auto w-full">
       <ProgressOverview />
       <TasksTable />
     </main>
