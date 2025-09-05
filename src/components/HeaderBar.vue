@@ -1,5 +1,7 @@
 <template>
-  <header class="flex items-center justify-between p-4 bg-[var(--color-cream)] shadow-md">
+  <header
+    class="flex items-center justify-between p-4 bg-[var(--color-cream)] shadow-md"
+  >
     <div class="flex items-center gap-3">
       <img src="/src/bridge-logo.png" alt="BridgeTGT" class="h-12" />
     </div>
@@ -34,7 +36,7 @@
           >
             <ul>
               <li
-                v-for="p in store.projects"
+                v-for="p in projectStore.projects"
                 :key="p.id"
                 class="px-3 py-2 hover:bg-[var(--color-lime)] hover:text-black flex justify-between items-center group cursor-pointer"
                 @click="selectProject(p)"
@@ -89,11 +91,13 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from "vue";
 import { useProjectStore } from "../stores/projectStore";
+import { useTaskStore } from "../stores/taskStore";
 import ProjectModal from "./ProjectModal.vue";
 import TaskModal from "./TaskModal.vue";
 import ConfirmModal from "./ConfirmModal.vue";
 
-const store = useProjectStore();
+const projectStore = useProjectStore();
+const taskStore = useTaskStore();
 
 const showDropdown = ref(false);
 const dropdownRef = ref(null);
@@ -102,7 +106,7 @@ function toggleDropdown() {
   showDropdown.value = !showDropdown.value;
 }
 function selectProject(p) {
-  store.selectedProjectId = p.id;
+  projectStore.selectedProjectId = p.id;
   showDropdown.value = false;
 }
 
@@ -121,9 +125,9 @@ const showProjectModal = ref(false);
 const projectIsEdit = ref(false);
 const editingProject = ref(null);
 
-function openProjectModal(isEdit, project = null) {
+function openProjectModal(isEdit, projectStore = null) {
   projectIsEdit.value = isEdit;
-  editingProject.value = project;
+  editingProject.value = projectStore;
   showProjectModal.value = true;
 }
 function closeProjectModal() {
@@ -133,7 +137,7 @@ function saveProject(data) {
   if (projectIsEdit.value && editingProject.value) {
     editingProject.value.name = data.name;
   } else {
-    store.addProject(data.name);
+    projectStore.addProject(data.name);
   }
   closeProjectModal();
 }
@@ -153,9 +157,9 @@ function closeTaskModal() {
 }
 function saveTask(data) {
   if (taskIsEdit.value && editingTask.value) {
-    store.updateTask(store.selectedProjectId, editingTask.value.id, data);
+    taskStore.updateTask(editingTask.value.id, data);
   } else {
-    store.addTask(store.selectedProjectId, data);
+    taskStore.addTask(data);
   }
   closeTaskModal();
 }
@@ -172,7 +176,8 @@ function closeConfirmProject() {
   projectToDelete.value = null;
 }
 function confirmDeleteProject() {
-  if (projectToDelete.value) store.deleteProject(projectToDelete.value.id);
+  if (projectToDelete.value)
+    projectStore.deleteProject(projectToDelete.value.id);
   closeConfirmProject();
 }
 </script>
