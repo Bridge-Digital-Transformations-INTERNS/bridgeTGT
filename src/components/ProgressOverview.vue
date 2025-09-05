@@ -24,7 +24,18 @@
 
     <div class="mt-4">
       <div class="mb-2 font-medium">{{ titleLabel }}</div>
-      <div class="w-full h-4 bg-gray-200 rounded overflow-hidden mb-3">
+      <div class="w-full bg-gray-200 rounded-full h-4 mt-2 overflow-hidden">
+        <div
+          class="h-4 rounded-full transition-all duration-1000 ease-out"
+          :style="{
+            width: percent + '%',
+            background:
+              'linear-gradient(90deg, var(--color-lime), var(--color-palm))',
+          }"
+        />
+      </div>
+
+      <!-- <div class="w-full h-4 bg-gray-200 rounded overflow-hidden mb-3">
         <div
           class="h-4 rounded"
           :style="{
@@ -33,7 +44,7 @@
               'linear-gradient(90deg, var(--color-lime), var(--color-palm))',
           }"
         ></div>
-      </div>
+      </div> -->
 
       <div class="grid grid-cols-2 gap-4">
         <div>
