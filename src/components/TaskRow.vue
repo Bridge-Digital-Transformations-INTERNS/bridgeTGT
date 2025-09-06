@@ -1,13 +1,13 @@
 <template>
   <tr>
-    <td class="p-2">{{ task.title }}</td>
-    <td class="p-2">{{ task.phase }}</td>
-    <td class="p-2 capitalize">{{ task.weight }}</td>
-    <td class="p-2">
+    <td class="p-2 align-middle">{{ task.title }}</td>
+    <td class="p-2 align-middle">{{ task.phase }}</td>
+    <td class="p-2 align-middle capitalize">{{ task.weight }}</td>
+    <td class="p-2 align-middle">
       <span class="px-2 py-1 rounded text-xs" :class="statusClass">{{ task.status }}</span>
     </td>
-    <td class="p-2">{{ task.assignee }}</td>
-    <td class="p-2">
+    <td class="p-2 align-middle">{{ task.assignee }}</td>
+    <td class="p-2 align-middle">
       <button @click="$emit('edit', task)" class="text-sm mr-2">Edit</button>
       <button @click="$emit('delete', task)" class="text-sm text-red-600">Delete</button>
     </td>
