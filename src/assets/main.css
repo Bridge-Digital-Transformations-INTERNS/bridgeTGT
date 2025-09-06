@@ -1,7 +1,7 @@
-@import "tailwindcss/base";
+/* @import "tailwindcss/base";
 @import "tailwindcss/components";
-@import "tailwindcss/utilities";
-
+@import "tailwindcss/utilities"; */
+@import "tailwindcss";
 @layer base {
   :root {
     --font-albert: "Albert Sans", sans-serif;
@@ -17,7 +17,9 @@
     --color-cacao: #352623;
   }
 
-  html, body, #app {
+  html,
+  body,
+  #app {
     height: 100%;
     font-family: var(--font-albert);
     background: linear-gradient(180deg, #f7f9fb 0%, #ffffff 100%);
@@ -25,11 +27,24 @@
 }
 
 /* small utility for status colors used in components */
-.status-light { background-color: #fef3c7; }
-.status-medium { background-color: #fde68a; }
-.status-heavy { background-color: #fecaca; }
+.status-light {
+  background-color: #fef3c7;
+}
+.status-medium {
+  background-color: #fde68a;
+}
+.status-heavy {
+  background-color: #fecaca;
+}
 
 /* Task status colors */
-.status-inprogress { background-color: #bfdbfe; }
-.status-finished-not-validated { background-color: #93c5fd; }
-.status-finished-validated { background-color: #7c3aed; color: white }
+.status-inprogress {
+  background-color: #bfdbfe;
+}
+.status-finished-not-validated {
+  background-color: #93c5fd;
+}
+.status-finished-validated {
+  background-color: #7c3aed;
+  color: white;
+}

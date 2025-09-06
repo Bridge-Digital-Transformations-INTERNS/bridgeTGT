@@ -15,9 +15,9 @@
     "lint": "eslint . --fix"
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.1.12",
+    "@tailwindcss/vite": "^4.1.13",
     "pinia": "^3.0.3",
-    "tailwindcss": "^4.1.12",
+    "tailwindcss": "^4.1.13",
     "uuid": "^11.1.0",
     "vue": "^3.5.18",
     "vue-router": "^4.5.1"
