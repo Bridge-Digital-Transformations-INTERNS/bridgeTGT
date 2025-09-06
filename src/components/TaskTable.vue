@@ -85,7 +85,7 @@
             :key="t.id"
             class="hover:bg-slate-50 last:border-b-0"
           >
-            <td class="px-4 py-3 align-top">
+            <td class="px-4 py-3 align-middle">
               <div class="flex flex-col">
                 <div class="font-medium text-slate-800 truncate">
                   {{ t.title }}
@@ -96,19 +96,19 @@
               </div>
             </td>
 
-            <td class="px-4 py-3 align-top">
+            <td class="px-4 py-3 align-middle">
               <div class="text-sm text-slate-700 whitespace-nowrap">
                 {{ t.phase }}
               </div>
             </td>
 
-            <td class="px-4 py-3 align-top">
+            <td class="px-4 py-3 align-middle">
               <div class="flex items-center justify-start">
                 <CategoryBadge :category="t.weight" />
               </div>
             </td>
 
-            <td class="px-4 py-3 align-top">
+            <td class="px-4 py-3 align-middle">
               <div class="flex items-center gap-2">
                 <select
                   :value="
@@ -129,13 +129,13 @@
               </div>
             </td>
 
-            <td class="px-4 py-3 align-top">
+            <td class="px-4 py-3 align-middle">
               <div class="text-sm text-slate-700 truncate">
                 {{ t.assignee }}
               </div>
             </td>
 
-            <td class="px-4 py-3 align-top text-right">
+            <td class="px-4 py-3 align-middle text-right">
               <div class="inline-flex items-center gap-2">
                 <button
                   @click="openEdit(t)"
