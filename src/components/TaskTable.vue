@@ -41,7 +41,7 @@
 
         <thead class="bg-slate-50">
           <tr class="text-left text-xs text-slate-500 uppercase">
-            <th class="px-4 py-3">Task</th>
+            <th class="px-4 py-3">Tasksss</th>
             <th class="px-4 py-3">Phase</th>
             <th class="px-4 py-3">Category</th>
             <th class="px-4 py-3">Status</th>
