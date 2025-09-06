@@ -81,7 +81,7 @@
           class="bg-white divide-y divide-slate-100"
         >
           <tr
-            v-for="t in taskStore.filteredTasks"
+            v-for="t in taskStore.paginatedTasks"
             :key="t.id"
             class="hover:bg-slate-50 last:border-b-0"
           >
@@ -162,6 +162,14 @@
       </table>
     </div>
 
+    <!-- Pagination -->
+    <Pagination
+      :paginationInfo="taskStore.paginationInfo"
+      @goToPage="taskStore.goToPage"
+      @prevPage="taskStore.prevPage"
+      @nextPage="taskStore.nextPage"
+    />
+
     <!-- Task Modal -->
     <TaskModal
       :open="showModal"
@@ -187,6 +195,7 @@ import TaskModal from "./ui/TaskModal.vue";
 import { ref } from "vue";
 import ConfirmModal from "./ui/ConfirmModal.vue";
 import CategoryBadge from "./badges/CategoryBadge.vue";
+import Pagination from "./ui/Pagination.vue";
 import { useTaskStore } from "../stores/taskStore";
 
 const taskStore = useTaskStore();
