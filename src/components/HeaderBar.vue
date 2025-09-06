@@ -1,24 +1,20 @@
 <template>
   <header
-    class="flex items-center justify-between p-4 bg-[var(--color-cream)] shadow-md"
+    class="flex items-center justify-between px-14 py-4 bg-[var(--color-cream)] shadow-md"
   >
     <div class="flex items-center gap-3">
-      <img src="/src/bridge-logo.png" alt="BridgeTGT" class="h-12" />
+      <img src="/src/bridge-logo.png" alt="BridgeTGT" class="h-10" />
     </div>
 
     <div class="flex items-center gap-3 relative">
-      <button
-        @click="openProjectModal(false)"
-        class="px-3 py-2 rounded bg-slate-100"
-      >
-        + Add Project
-      </button>
-      <button
-        @click="openTaskModal(false)"
-        class="px-3 py-2 rounded bg-slate-100"
-      >
-        + Add Task
-      </button>
+      <div class="flex justify-between p-2">
+        <Icon
+          icon="material-symbols:folder-outline-rounded"
+          width="18"
+          height="18"
+        />
+        <p>Projects:</p>
+      </div>
 
       <!-- Project dropdown -->
       <div class="relative" ref="dropdownRef">
@@ -61,6 +57,19 @@
           </div>
         </transition>
       </div>
+
+      <button
+        @click="openProjectModal(false)"
+        class="px-3 py-2 rounded bg-slate-100"
+      >
+        + Add Project
+      </button>
+      <button
+        @click="openTaskModal(false)"
+        class="px-3 py-2 rounded bg-slate-100"
+      >
+        + Add Task
+      </button>
     </div>
 
     <!-- Modals -->
@@ -95,6 +104,7 @@ import { useTaskStore } from "../stores/taskStore";
 import ProjectModal from "./ui/ProjectModal.vue";
 import TaskModal from "./ui/TaskModal.vue";
 import ConfirmModal from "./ui/ConfirmModal.vue";
+import { Icon } from "@iconify/vue";
 
 const projectStore = useProjectStore();
 const taskStore = useTaskStore();
