@@ -2,8 +2,18 @@
   <div class="mt-6 bg-white p-5 rounded-2xl shadow-sm border border-slate-100">
     <!-- Task Timeline Header -->
     <div class="flex items-center gap-3 mb-6">
-      <svg class="w-6 h-6 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      <svg
+        class="w-6 h-6 text-slate-600"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+        ></path>
       </svg>
       <h2 class="text-xl font-semibold text-slate-800">Task Timeline</h2>
     </div>
@@ -94,7 +104,13 @@
             <td class="px-4 py-3 align-top">
               <div class="flex items-center gap-2">
                 <select
-                  :value="t.status === 'completed' ? (t.validated ? 'completed-validated' : 'completed') : t.status"
+                  :value="
+                    t.status === 'completed'
+                      ? t.validated
+                        ? 'completed-validated'
+                        : 'completed'
+                      : t.status
+                  "
                   @change="updateStatus(t, $event)"
                   class="px-2 py-1 border rounded-md text-xs bg-white"
                 >
@@ -159,8 +175,6 @@ import { ref } from "vue";
 import TaskModal from "./ui/TaskModal.vue";
 import ConfirmModal from "./ui/ConfirmModal.vue";
 import CategoryBadge from "./badges/CategoryBadge.vue";
-import StatusBadge from "./badges/StatusBadge.vue";
-
 import { useTaskStore } from "../stores/taskStore";
 
 const taskStore = useTaskStore();
@@ -202,11 +216,12 @@ function confirmDelete() {
 // Inline status update
 function updateStatus(task, event) {
   const newStatus = event.target.value;
-  const isCompleted = newStatus === 'completed' || newStatus === 'completed-validated';
-  const isValidated = newStatus === 'completed-validated';
+  const isCompleted =
+    newStatus === "completed" || newStatus === "completed-validated";
+  const isValidated = newStatus === "completed-validated";
 
   taskStore.updateTask(task.id, {
-    status: isCompleted ? 'completed' : newStatus,
+    status: isCompleted ? "completed" : newStatus,
     validated: isValidated,
   });
 }
@@ -235,4 +250,3 @@ function updateStatus(task, event) {
   transition: all 0.15s ease;
 }
 </style>
-e>
