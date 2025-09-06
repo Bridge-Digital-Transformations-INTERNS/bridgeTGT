@@ -9,7 +9,7 @@
 
     <PhaseOverview :project="selectedProject" v-model="selectedPhase" />
 
-    <TaskTable :tasks="tasksForPhase" @edit="editTask" @delete="deleteTask" />
+    <TaskTable @edit="editTask" @delete="deleteTask" />
 
     <AddProjectModal
       v-if="showProjectModal"
@@ -37,22 +37,23 @@ import AddTaskModal from "@/components/AddTaskModal.vue";
 const projectStore = useProjectStore();
 const taskStore = useTaskStore();
 
-const selectedProjectId = ref(null);
-const selectedPhase = ref("Overall");
+const selectedPhase = computed({
+  get: () => taskStore.selectedPhase,
+  set: (value) => {
+    taskStore.selectedPhase = value;
+  }
+});
 const showProjectModal = ref(false);
 const showTaskModal = ref(false);
 
 const projects = projectStore.projects;
-const selectedProject = computed(() =>
-  projectStore.getProjectById(selectedProjectId.value),
-);
-
-const tasksForPhase = computed(() => {
-  if (!selectedProject.value) return [];
-  const allTasks = taskStore.getTasksByProject(selectedProjectId.value);
-  if (selectedPhase.value === "Overall") return allTasks;
-  return allTasks.filter((t) => t.phase === selectedPhase.value);
+const selectedProjectId = computed({
+  get: () => projectStore.selectedProjectId,
+  set: (value) => {
+    projectStore.selectedProjectId = value;
+  }
 });
+const selectedProject = computed(() => projectStore.selectedProject);
 
 const editTask = (taskId) => {
   console.log("Edit task", taskId);

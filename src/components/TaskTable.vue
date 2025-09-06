@@ -53,7 +53,7 @@
     </div>
 
     <!-- Task Table -->
-    <div class="overflow-x-auto h-92 flex flex-col">
+    <div class="overflow-x-auto h-125 overflow-y-auto border border-slate-200 rounded-lg">
       <table class="min-w-full table-fixed divide-y divide-slate-100 text-sm">
         <colgroup>
           <col style="width: 30%" />
@@ -75,9 +75,9 @@
           </tr>
         </thead>
 
-        <tbody class="bg-white divide-y divide-slate-100 overflow-y-auto">
+        <tbody class="bg-white divide-y divide-slate-100">
           <tr
-            v-for="t in taskStore.paginatedTasks"
+            v-for="t in taskStore.displayTasks"
             :key="t.id"
             class="hover:bg-slate-50 last:border-b-0"
           >
@@ -106,22 +106,11 @@
 
             <td class="px-4 py-3 align-middle">
               <div class="flex items-center gap-2">
-                <select
-                  :value="
-                    t.status === 'completed'
-                      ? t.validated
-                        ? 'completed-validated'
-                        : 'completed'
-                      : t.status
-                  "
-                  @change="updateStatus(t, $event)"
-                  class="px-2 py-1 border rounded-md text-xs bg-white"
-                >
-                  <option value="pending">Pending</option>
-                  <option value="inprogress">In Progress</option>
-                  <option value="completed">Completed</option>
-                  <option value="completed-validated">Validated</option>
-                </select>
+                <StatusDropdown
+                  :value="t.status"
+                  :validated="t.validated"
+                  @update:value="updateStatus(t, $event)"
+                />
               </div>
             </td>
 
@@ -158,13 +147,6 @@
       </table>
     </div>
 
-    <!-- Pagination -->
-    <Pagination
-      :paginationInfo="taskStore.paginationInfo"
-      @goToPage="taskStore.goToPage"
-      @prevPage="taskStore.prevPage"
-      @nextPage="taskStore.nextPage"
-    />
 
     <!-- Task Modal -->
     <TaskModal
@@ -191,7 +173,7 @@ import TaskModal from "./ui/TaskModal.vue";
 import { ref } from "vue";
 import ConfirmModal from "./ui/ConfirmModal.vue";
 import CategoryBadge from "./badges/CategoryBadge.vue";
-import Pagination from "./ui/PaginationCom.vue";
+import StatusDropdown from "./ui/StatusDropdown.vue";
 import { useTaskStore } from "../stores/taskStore";
 
 const taskStore = useTaskStore();
@@ -232,13 +214,23 @@ function confirmDelete() {
 
 // Inline status update
 function updateStatus(task, event) {
-  const newStatus = event.target.value;
-  const isCompleted =
-    newStatus === "completed" || newStatus === "completed-validated";
-  const isValidated = newStatus === "completed-validated";
+  // Handle both old event structure and new object structure
+  let newStatus, isValidated;
+
+  if (event && typeof event === 'object' && 'status' in event) {
+    // New StatusDropdown event structure
+    newStatus = event.status;
+    isValidated = event.validated;
+  } else {
+    // Old select event structure (fallback)
+    newStatus = event.target.value;
+    const isCompleted = newStatus === "completed" || newStatus === "completed-validated";
+    isValidated = newStatus === "completed-validated";
+    newStatus = isCompleted ? "completed" : newStatus;
+  }
 
   taskStore.updateTask(task.id, {
-    status: isCompleted ? "completed" : newStatus,
+    status: newStatus,
     validated: isValidated,
   });
 }

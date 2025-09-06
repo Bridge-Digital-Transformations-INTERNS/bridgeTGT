@@ -15,6 +15,23 @@
     --color-powder: #a8bfd3;
     --color-cream: #fff4de;
     --color-cacao: #352623;
+
+    /* Status Colors for dropdowns */
+    --status-pending-bg: #ffffff;
+    --status-pending-text: #E67A3F;
+    --status-pending-border: #E67A3F;
+
+    --status-inprogress-bg: #ffffff;
+    --status-inprogress-text: #6FAED9;
+    --status-inprogress-border: #6FAED9;
+
+    --status-completed-bg: #ffffff;
+    --status-completed-text: #2F4C91;
+    --status-completed-border: #2F4C91;
+
+    --status-validated-bg: #ffffff;
+    --status-validated-text: #5B3C88;
+    --status-validated-border: #5B3C88;
   }
 
   html,
