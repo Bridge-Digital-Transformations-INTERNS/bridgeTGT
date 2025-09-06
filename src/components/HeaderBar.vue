@@ -92,9 +92,9 @@
 import { ref, onMounted, onBeforeUnmount } from "vue";
 import { useProjectStore } from "../stores/projectStore";
 import { useTaskStore } from "../stores/taskStore";
-import ProjectModal from "./ProjectModal.vue";
-import TaskModal from "./TaskModal.vue";
-import ConfirmModal from "./ConfirmModal.vue";
+import ProjectModal from "./ui/ProjectModal.vue";
+import TaskModal from "./ui/TaskModal.vue";
+import ConfirmModal from "./ui/ConfirmModal.vue";
 
 const projectStore = useProjectStore();
 const taskStore = useTaskStore();
