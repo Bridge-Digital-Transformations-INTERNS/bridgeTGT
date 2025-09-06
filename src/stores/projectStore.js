@@ -91,10 +91,10 @@ export const useProjectStore = defineStore("project", () => {
     // State
     projects,
     selectedProjectId,
-    
+
     // Computed
     selectedProject,
-    
+
     // Actions
     addProject,
     deleteProject,
@@ -103,4 +103,3 @@ export const useProjectStore = defineStore("project", () => {
     deleteTask,
   };
 });
-

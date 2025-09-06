@@ -35,7 +35,7 @@ export const useTaskStore = defineStore("task", () => {
         (t) =>
           t.title.toLowerCase().includes(search) ||
           (t.description && t.description.toLowerCase().includes(search)) ||
-          (t.assignee && t.assignee.toLowerCase().includes(search))
+          (t.assignee && t.assignee.toLowerCase().includes(search)),
       );
     }
 
@@ -145,12 +145,12 @@ export const useTaskStore = defineStore("task", () => {
     statusFilter,
     categoryFilter,
     selectedPhase,
-    
+
     // Computed
     allTasks,
     filteredTasks,
     taskStats,
-    
+
     // Actions
     addTask,
     updateTask,
