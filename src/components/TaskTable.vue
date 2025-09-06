@@ -1,5 +1,13 @@
 <template>
   <div class="mt-6 bg-white p-5 rounded-2xl shadow-sm border border-slate-100">
+    <!-- Task Timeline Header -->
+    <div class="flex items-center gap-3 mb-6">
+      <svg class="w-6 h-6 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+      <h2 class="text-xl font-semibold text-slate-800">Task Timeline</h2>
+    </div>
+
     <!-- Filters -->
     <div class="flex flex-wrap gap-3 items-center mb-5">
       <input
@@ -84,31 +92,17 @@
             </td>
 
             <td class="px-4 py-3 align-top">
-              <div class="flex items-center gap-3">
-                <div class="min-w-[88px]">
-                  <StatusBadge :status="t.status" :validated="t.validated" />
-                </div>
-                <div class="flex items-center gap-2">
-                  <select
-                    v-model="t.status"
-                    @change="updateStatus(t)"
-                    class="px-2 py-1 border rounded-md text-xs bg-white"
-                  >
-                    <option value="pending">Pending</option>
-                    <option value="inprogress">In Progress</option>
-                    <option value="completed">Completed</option>
-                  </select>
-
-                  <select
-                    v-if="t.status === 'completed'"
-                    v-model="t.validated"
-                    @change="updateStatus(t)"
-                    class="px-2 py-1 border rounded-md text-xs bg-white"
-                  >
-                    <option :value="false">Not Validated</option>
-                    <option :value="true">Validated</option>
-                  </select>
-                </div>
+              <div class="flex items-center gap-2">
+                <select
+                  :value="t.status === 'completed' ? (t.validated ? 'completed-validated' : 'completed') : t.status"
+                  @change="updateStatus(t, $event)"
+                  class="px-2 py-1 border rounded-md text-xs bg-white"
+                >
+                  <option value="pending">Pending</option>
+                  <option value="inprogress">In Progress</option>
+                  <option value="completed">Completed</option>
+                  <option value="completed-validated">Validated</option>
+                </select>
               </div>
             </td>
 
@@ -161,10 +155,12 @@
 
 <script setup>
 import { ref } from "vue";
+
 import TaskModal from "./ui/TaskModal.vue";
 import ConfirmModal from "./ui/ConfirmModal.vue";
 import CategoryBadge from "./badges/CategoryBadge.vue";
 import StatusBadge from "./badges/StatusBadge.vue";
+
 import { useTaskStore } from "../stores/taskStore";
 
 const taskStore = useTaskStore();
@@ -204,10 +200,14 @@ function confirmDelete() {
 }
 
 // Inline status update
-function updateStatus(task) {
+function updateStatus(task, event) {
+  const newStatus = event.target.value;
+  const isCompleted = newStatus === 'completed' || newStatus === 'completed-validated';
+  const isValidated = newStatus === 'completed-validated';
+
   taskStore.updateTask(task.id, {
-    status: task.status,
-    validated: task.validated ?? false,
+    status: isCompleted ? 'completed' : newStatus,
+    validated: isValidated,
   });
 }
 </script>
