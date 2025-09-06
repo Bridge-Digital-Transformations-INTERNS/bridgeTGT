@@ -170,9 +170,8 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-
 import TaskModal from "./ui/TaskModal.vue";
+import { ref } from "vue";
 import ConfirmModal from "./ui/ConfirmModal.vue";
 import CategoryBadge from "./badges/CategoryBadge.vue";
 import { useTaskStore } from "../stores/taskStore";
