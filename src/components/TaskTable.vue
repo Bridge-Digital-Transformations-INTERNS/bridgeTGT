@@ -20,11 +20,18 @@
 
     <!-- Filters -->
     <div class="flex flex-wrap gap-3 items-center mb-5">
-      <input
-        v-model="taskStore.searchQuery"
-        placeholder="Search tasks..."
-        class="flex-1 min-w-[180px] px-3 py-2 border rounded-lg border-slate-200 text-sm focus:outline-none focus:ring-1 focus:ring-slate-300"
-      />
+      <div class="relative flex-1 min-w-[180px]">
+        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <svg class="h-4 w-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </div>
+        <input
+          v-model="taskStore.searchQuery"
+          placeholder="Search tasks..."
+          class="w-full pl-10 pr-3 py-2 border rounded-lg border-slate-200 text-sm focus:outline-none focus:ring-1 focus:ring-slate-300"
+        />
+      </div>
       <select
         v-model="taskStore.categoryFilter"
         class="px-3 py-2 border rounded-lg border-slate-200 text-sm"
@@ -74,11 +81,11 @@
           class="bg-white divide-y divide-slate-100"
         >
           <tr
-            v-for="t in taskStore.filteredTasks"
+            v-for="t in taskStore.paginatedTasks"
             :key="t.id"
             class="hover:bg-slate-50 last:border-b-0"
           >
-            <td class="px-4 py-3 align-top">
+            <td class="px-4 py-3 align-middle">
               <div class="flex flex-col">
                 <div class="font-medium text-slate-800 truncate">
                   {{ t.title }}
@@ -89,19 +96,19 @@
               </div>
             </td>
 
-            <td class="px-4 py-3 align-top">
+            <td class="px-4 py-3 align-middle">
               <div class="text-sm text-slate-700 whitespace-nowrap">
                 {{ t.phase }}
               </div>
             </td>
 
-            <td class="px-4 py-3 align-top">
+            <td class="px-4 py-3 align-middle">
               <div class="flex items-center justify-start">
                 <CategoryBadge :category="t.weight" />
               </div>
             </td>
 
-            <td class="px-4 py-3 align-top">
+            <td class="px-4 py-3 align-middle">
               <div class="flex items-center gap-2">
                 <select
                   :value="
@@ -122,25 +129,31 @@
               </div>
             </td>
 
-            <td class="px-4 py-3 align-top">
+            <td class="px-4 py-3 align-middle">
               <div class="text-sm text-slate-700 truncate">
                 {{ t.assignee }}
               </div>
             </td>
 
-            <td class="px-4 py-3 align-top text-right">
+            <td class="px-4 py-3 align-middle text-right">
               <div class="inline-flex items-center gap-2">
                 <button
                   @click="openEdit(t)"
-                  class="px-3 py-1.5 bg-blue-50 text-blue-700 text-xs rounded-md border border-blue-100 hover:bg-blue-100"
+                  class="p-2 bg-blue-50 text-blue-700 rounded-md border border-blue-100 hover:bg-blue-100 transition-colors"
+                  title="Edit task"
                 >
-                  Edit
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                  </svg>
                 </button>
                 <button
                   @click="askDelete(t)"
-                  class="px-3 py-1.5 bg-red-50 text-red-700 text-xs rounded-md border border-red-100 hover:bg-red-100"
+                  class="p-2 bg-red-50 text-red-700 rounded-md border border-red-100 hover:bg-red-100 transition-colors"
+                  title="Delete task"
                 >
-                  Delete
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                  </svg>
                 </button>
               </div>
             </td>
@@ -148,6 +161,14 @@
         </transition-group>
       </table>
     </div>
+
+    <!-- Pagination -->
+    <Pagination
+      :paginationInfo="taskStore.paginationInfo"
+      @goToPage="taskStore.goToPage"
+      @prevPage="taskStore.prevPage"
+      @nextPage="taskStore.nextPage"
+    />
 
     <!-- Task Modal -->
     <TaskModal
@@ -170,11 +191,11 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-
 import TaskModal from "./ui/TaskModal.vue";
+import { ref } from "vue";
 import ConfirmModal from "./ui/ConfirmModal.vue";
 import CategoryBadge from "./badges/CategoryBadge.vue";
+import Pagination from "./ui/PaginationCom.vue";
 import { useTaskStore } from "../stores/taskStore";
 
 const taskStore = useTaskStore();
