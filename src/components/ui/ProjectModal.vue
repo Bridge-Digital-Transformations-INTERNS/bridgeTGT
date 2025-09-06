@@ -9,7 +9,7 @@
       <label class="text-sm font-medium">Project Name</label>
       <input
         v-model="name"
-        class="p-2 border rounded"
+        class="p-2  border border-slate-200 rounded outline-none"
         placeholder="Enter project name"
       />
     </div>

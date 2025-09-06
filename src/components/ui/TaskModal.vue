@@ -14,14 +14,14 @@
             <label class="text-sm font-medium">Task Title</label>
             <input
               v-model="form.title"
-              class="p-2 border rounded w-full"
+              class="p-2 border border-slate-200 rounded w-full"
               placeholder="Task name"
             />
           </div>
 
           <div>
             <label class="text-sm font-medium">Phase</label>
-            <select v-model="form.phase" class="p-2 border rounded w-full">
+            <select v-model="form.phase" class="p-2 border border-slate-200 rounded w-full">
               <option>Planning</option>
               <option>Analysis</option>
               <option>Designing</option>
@@ -32,7 +32,7 @@
 
           <div>
             <label class="text-sm font-medium">Weight</label>
-            <select v-model="form.weight" class="p-2 border rounded w-full">
+            <select v-model="form.weight" class="p-2 border border-slate-200 rounded w-full">
               <option value="light">Light</option>
               <option value="medium">Medium</option>
               <option value="heavy">Heavy</option>
@@ -41,7 +41,7 @@
 
           <div>
             <label class="text-sm font-medium">Status</label>
-            <select v-model="form.status" class="p-2 border rounded w-full">
+            <select v-model="form.status" class="p-2 border border-slate-200 rounded w-full">
               <option value="pending">Pending</option>
               <option value="inprogress">In Progress</option>
               <option value="completed">Completed</option>
@@ -52,7 +52,7 @@
             <label class="text-sm font-medium">Assignee</label>
             <input
               v-model="form.assignee"
-              class="p-2 border rounded w-full"
+              class="p-2 border border-slate-200 rounded w-full"
               placeholder="Assignee"
             />
           </div>
@@ -68,7 +68,7 @@
             <input
               type="date"
               v-model="form.startDate"
-              class="p-2 border rounded w-full"
+              class="p-2 border border-slate-200 rounded w-full"
             />
           </div>
 
@@ -77,7 +77,7 @@
             <input
               type="date"
               v-model="form.targetDate"
-              class="p-2 border rounded w-full"
+              class="p-2 border border-slate-200 rounded w-full"
             />
           </div>
 
@@ -86,7 +86,7 @@
             <input
               type="date"
               v-model="form.endDate"
-              class="p-2 border rounded w-full"
+              class="p-2 border border-slate-200 rounded w-full"
             />
           </div>
         </div>
