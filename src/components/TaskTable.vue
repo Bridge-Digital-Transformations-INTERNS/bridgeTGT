@@ -75,11 +75,7 @@
           </tr>
         </thead>
 
-        <transition-group
-          name="list"
-          tag="tbody"
-          class="bg-white divide-y divide-slate-100"
-        >
+        <tbody class="bg-white divide-y divide-slate-100">
           <tr
             v-for="t in taskStore.paginatedTasks"
             :key="t.id"
@@ -158,7 +154,7 @@
               </div>
             </td>
           </tr>
-        </transition-group>
+        </tbody>
       </table>
     </div>
 
@@ -248,26 +244,3 @@ function updateStatus(task, event) {
 }
 </script>
 
-<style scoped>
-.list-enter-from {
-  opacity: 0;
-  transform: translateY(-6px);
-}
-.list-enter-to {
-  opacity: 1;
-  transform: translateY(0);
-}
-.list-enter-active {
-  transition: all 0.18s ease;
-}
-.list-leave-from {
-  opacity: 1;
-}
-.list-leave-to {
-  opacity: 0;
-  transform: translateY(-6px);
-}
-.list-leave-active {
-  transition: all 0.15s ease;
-}
-</style>
