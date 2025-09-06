@@ -161,10 +161,10 @@
 
 <script setup>
 import { ref } from "vue";
-import TaskModal from "./TaskModal.vue";
-import ConfirmModal from "./ConfirmModal.vue";
-import CategoryBadge from "./CategoryBadge.vue";
-import StatusBadge from "./StatusBadge.vue";
+import TaskModal from "./ui/TaskModal.vue";
+import ConfirmModal from "./ui/ConfirmModal.vue";
+import CategoryBadge from "./badges/CategoryBadge.vue";
+import StatusBadge from "./badges/StatusBadge.vue";
 import { useTaskStore } from "../stores/taskStore";
 
 const taskStore = useTaskStore();
@@ -235,3 +235,4 @@ function updateStatus(task) {
   transition: all 0.15s ease;
 }
 </style>
+e>
