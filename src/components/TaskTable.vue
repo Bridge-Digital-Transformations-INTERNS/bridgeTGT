@@ -53,7 +53,7 @@
     </div>
 
     <!-- Task Table -->
-    <div class="overflow-x-auto">
+    <div class="overflow-x-auto h-92 flex flex-col">
       <table class="min-w-full table-fixed divide-y divide-slate-100 text-sm">
         <colgroup>
           <col style="width: 30%" />
@@ -64,7 +64,7 @@
           <col style="width: 10%" />
         </colgroup>
 
-        <thead class="bg-slate-50">
+        <thead class="bg-slate-50 sticky top-0 z-10">
           <tr class="text-left text-xs text-slate-500 uppercase">
             <th class="px-4 py-3">Tasks</th>
             <th class="px-4 py-3">Phase</th>
@@ -75,11 +75,7 @@
           </tr>
         </thead>
 
-        <transition-group
-          name="list"
-          tag="tbody"
-          class="bg-white divide-y divide-slate-100"
-        >
+        <tbody class="bg-white divide-y divide-slate-100 overflow-y-auto">
           <tr
             v-for="t in taskStore.paginatedTasks"
             :key="t.id"
@@ -158,7 +154,7 @@
               </div>
             </td>
           </tr>
-        </transition-group>
+        </tbody>
       </table>
     </div>
 
@@ -248,26 +244,3 @@ function updateStatus(task, event) {
 }
 </script>
 
-<style scoped>
-.list-enter-from {
-  opacity: 0;
-  transform: translateY(-6px);
-}
-.list-enter-to {
-  opacity: 1;
-  transform: translateY(0);
-}
-.list-enter-active {
-  transition: all 0.18s ease;
-}
-.list-leave-from {
-  opacity: 1;
-}
-.list-leave-to {
-  opacity: 0;
-  transform: translateY(-6px);
-}
-.list-leave-active {
-  transition: all 0.15s ease;
-}
-</style>

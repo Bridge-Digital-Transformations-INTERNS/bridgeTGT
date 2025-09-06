@@ -12,7 +12,7 @@ export const useTaskStore = defineStore("task", () => {
 
   // Pagination
   const currentPage = ref(1);
-  const itemsPerPage = ref(10);
+  const itemsPerPage = ref(5);
 
   // Get project store for accessing project data
   const projectStore = useProjectStore();
